@@ -227,270 +227,70 @@
 					</ul>
 					</center>
 				</nav>
-				<div class=" tab-content tab-content-t ">
+					<div class=" tab-content tab-content-t ">
+
+					<!--TAB1-->
 					<div class="tab-pane active text-style" id="tab1">
 						<div class=" con-w3l">
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">								
-									<a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-										<img src="<?php echo base_url('assets/image/menu/ma1.jpg');?>" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Soto</a></h6>							
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.15.000</em></p>
-											  
-											<div class="clearfix"></div>
-										</div>
-										<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b " data-id="1" data-name="Soto" data-summary="summary 1" data-price="15.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma1.jpg');?>">Add to Cart</button>
-										</div>
-										
-									</div>
-								</div>
-							</div>
+						<?php foreach ($makanan as $menuItem): ?>
+
+                        
 							<div class="col-md-3 m-wthree">
 								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal2" class="offer-img">
-										<img src="<?php echo base_url('assets/image/menu/ma2.jpg');?>" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Nasi Bali</a></h6>							
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.20.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-												<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="2" data-name="Nasi Bali" data-summary="summary 2" data-price="20.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma2.jpg');?>">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal3" class="offer-img">
-										<img src="<?php echo base_url('assets/image/menu/ma3.jpg');?>" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Steak</a></h6>							
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.35.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="3" data-name="Steak" data-summary="summary 3" data-price="35.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma3.jpg');?>">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal4" class="offer-img">
-										<img src="<?php echo base_url('assets/image/menu/ma4.jpg');?>" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Kare</a></h6>							
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.25.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="4" data-name="Kare" data-summary="summary 4" data-price="28.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma4.jpg');?>">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-						 </div>
-					</div>
-					<div class="tab-pane  text-style" id="tab2">
+                            
+                                <img src="<?php echo $menuItem['g_makanan'] ?>"/>
+                                <figcaption>
+                                    <span><?php echo $menuItem['nama_makanan']; ?></span><br>
+                                    <span><?php echo $menuItem['hrg_makanan'] ?></span>
+                                </figcaption>
+
+                                <div class="pesan">
+                                    <i class="fa fa-cart-plus"></i><span>Pesan</span>
+                                </div>
+                            </figure>
+                            	</div>
+
+                        	</div>
+                        <?php endforeach; ?>
+                    
+                        </div>
+                    </div>
+                	<!--/TAB1-->
+
+                	<!--TAB2-->
+                	<div class="tab-pane active text-style" id="tab2">
 						<div class=" con-w3l">
+						<?php foreach ($minuman as $menuItem): ?>
+
+                        
 							<div class="col-md-3 m-wthree">
 								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal5" class="offer-img">
-										<img src="../image/menu/mi1.jpg" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Orange Squash</a></h6>							
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.12.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="5" data-name="Orange Squash" data-summary="summary 5" data-price="12.000" data-quantity="1" data-image="../image/menu/mi1.jpg">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal6" class="offer-img">
-										<img src="../image/menu/mi2.jpg" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Ice Lemon Honey</a></h6>							
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.10.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="6" data-name="Ice Lemon Honey" data-summary="summary 6" data-price="10.000" data-quantity="1" data-image="../image/menu/mi2.jpg">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal7" class="offer-img">
-										<img src="<?php echo base_url('assets/image/menu/mi3.jpg');?>" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Ice Lemon Tea</a></h6>					
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.8.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="7" data-name="Ice Lemon Tea" data-summary="summary 7" data-price="8.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/mi3.jpg');?>">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal8" class="offer-img">
-										<img src="../image/menu/mi4.jpg" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Strawberry Delight</a></h6>							
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.15.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="8" data-name="Strawberry Delight" data-summary="summary 8" data-price="15.000" data-quantity="1" data-image="../image/menu/mi4.jpg">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-						 </div>		  
-					</div>
-					<div class="tab-pane  text-style" id="tab3">
-						<div class=" con-w3l">
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-								<a href="#" data-toggle="modal" data-target="#myModal9" class="offer-img">
-										<img src="<?php echo base_url('assets/image/menu/ta1.jpg');?>" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Kerupuk</a>(500gr)</h6>			
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.15.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="9" data-name="Kerupuk Tenggiri" data-summary="summary 9" data-price="15000" data-quantity="1" data-image="../image/menu/ta1.jpg">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal10" class="offer-img">
-										<img src="<?php echo base_url('assets/image/menu/ta2.jpg');?>" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Bawang Goreng</a></h6>				
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.5.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="10" data-name="Bawang Goreng" data-summary="summary 10" data-price="5.000" data-quantity="1" data-image="../image/menu/ta2.jpg">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal11" class="offer-img">
-										<img src="<?php echo base_url('assets/image/menu/ta3.jpg');?>" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Onion Ring</a></h6>						
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.13.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="11" data-name="Onion Ring" data-summary="summary 11" data-price="13.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ta3.jpg');?>">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal12" class="offer-img">
-										<img src="<?php echo base_url('assets/image/menu/ta4.jpg');?>" class="img-responsive" alt="">
-										<div class="offer"><p><span>Offer</span></p></div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">Kentang Goreng</a></h6>			
-										</div>
-										<div class="mid-2">
-											<p ><em class="item_price">Rp.15.000</em></p>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="12" data-name="Kentang Goreng" data-summary="summary 12" data-price="15.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ta4.jpg');?>">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-						 </div>		  
-					</div>
-				</div>
-			</div>
-		
+                            
+                                <img src="<?php echo $menuItem['g_minuman'] ?>"/>
+                                <figcaption>
+                                    <span><?php echo $menuItem['nama_minuman']; ?></span><br>
+                                    <span><?php echo $menuItem['hrg_minuman'] ?></span>
+                                </figcaption>
+
+                                <div class="pesan">
+                                    <i class="fa fa-cart-plus"></i><span>Pesan</span>
+                                </div>
+                            </figure>
+                            	</div>
+
+                        	</div>
+                        <?php endforeach; ?>
+                    
+                        </div>
+                    </div>
+                	<!--/TAB2-->
+                	<div class="tab-pane active text-style" id="tab2">
+                	</div>
+                	</div>	
+        	</div>
+   		</div>
 	</div>
-	</div>
-	</div>
+</div>
 	</section>
 	<!-- Menu Makanan=================================>
 
