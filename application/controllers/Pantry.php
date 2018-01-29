@@ -5,7 +5,7 @@ class Pantry extends CI_Controller {
 
 	public function index()
 	{
-		/*$data = array(
+		$data = array(
 				'signin' => $this->session->userdata('signin'),
 				'divisi' => $this->session->userdata('divisi')
 		);
@@ -14,7 +14,7 @@ class Pantry extends CI_Controller {
 			$this->load->view('pages/pegawai/pantry');
 		}else {
 			redirect(base_url());
-		}*/
+		}
 		$this->load->view('pages/pantry/pantry');
 	}
 }

@@ -32,16 +32,22 @@ class Login extends CI_Controller {
 		$pass = $this->input->post('password');
 		$data = array(
 			'device' => $device,
-			'password' => $pass
+			'password' => $pass,
+			'status' => 0
 			 );
+		$status = 1;
 		$res = $this->db->get_where('devices',$data);
 		if ($res->num_rows() > 0 ) {
 			$this->session->set_userdata(
 			array(
 				'signin' => true,
-				'device' => $device
+				'device' => $device,
+				'status' => $status
 				)
 			);
+			$data = array('device' => $device, 'password' => $pass, 'status' => 1);
+        	$this->db->where(device, $device); // removed quotes
+        	$this->db->update('devices', $data);
 			redirect(base_url('pelanggan'));
 		} else {
 			$this->session->set_flashdata('result_login', 'Username atau Password Salah.');

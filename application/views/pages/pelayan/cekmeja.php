@@ -78,22 +78,22 @@
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
-			    <li class="dropdown">
-	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
-	        		<ul class="dropdown-menu">
-						<li class="dropdown-menu-header text-center">
-							<strong>Settings</strong>
-						</li>
-						<li class="m_2"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-usd"></i> Payments <span class="label label-default">42</span></a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
-						<li class="divider"></li>
-						<li class="m_2"><a href="#"><i class="fa fa-shield"></i> Lock Profile</a></li>
-						<li class="m_2"><a href="<?php echo base_url('login/destroy'); ?>"><i class="fa fa-lock"></i> Logout</a></li>	
-	        		</ul>
-	      		</li>
-			</ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-menu-header text-center">
+                            <strong>Settings</strong>
+                        </li>
+                        <li class="m_2"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                        <li class="m_2"><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
+                        <li class="m_2"><a href="#"><i class="fa fa-usd"></i> Payments <span class="label label-default">42</span></a></li>
+                        <li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
+                        <li class="divider"></li>
+                        <li class="m_2"><a href="#"><i class="fa fa-shield"></i> Lock Profile</a></li>
+                        <li class="m_2"><a href="<?php echo base_url('login/destroy'); ?>"><i class="fa fa-lock"></i> Logout</a></li>   
+                    </ul>
+                </li>
+            </ul>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <center>
@@ -117,85 +117,8 @@
         <div class="graphs">
             <h3>Cek Meja</h3>
             <br>
-     	<div class="row clearfix">
-        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="header bg-red" align="center" id="bID">
-                            <h3 class="ketersediaan" id="ket">
-                                Tersedia
-                            </h3>
-                        </div>
-                        <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
-                        </div>
-                        <br>
-                        <center>
-                        <input type="button" onclick="changeColor()" value="Pilih" id="openButton" name="openButton">
-                        <input type="button" onclick="changeColor()" value="Buka" id="closeButton" name="closeButton" hidden="true" disabled="disabled">
-                        </center>
-                        <br>
-                    </div>
-                </div>
-        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="header bg-red" align="center" id="bID">
-                            <h3 class="ketersediaan" id="ket">
-                                Tersedia
-                            </h3>
-                        </div>
-                        <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
-                        </div>
-                        <br>
-                        <center>
-                        <input type="button" onclick="changeColor()" value="Pilih" id="openButton" name="openButton">
-                        <input type="button" onclick="changeColor()" value="Buka" id="closeButton" name="closeButton" hidden="true" disabled="disabled">
-                        </center>
-                        <br>
-                    </div>
-                </div>
-        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="header bg-red" align="center" id="bID">
-                            <h3 class="ketersediaan" id="ket">
-                                Tersedia
-                            </h3>
-                        </div>
-                        <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
-                        </div>
-                        <br>
-                        <center>
-                        <BUTTON onClick="changeColor()" id="tombol">Non Aktifkan</BUTTON>
-                        </center>
-                        <br>
-                    </div>
-                </div>
-        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="header bg-red" align="center" id="bID">
-                            <h3 class="ketersediaan" id="ket">
-                                Tersedia
-                            </h3>
-                        </div>
-                        <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
-                        </div>
-                        <br>
-                        <center>
-                        <BUTTON onClick="changeColor()" id="tombol">Non Aktifkan</BUTTON>
-                        </center>
-                        <br>
-                    </div>
-                </div>
+        <div class="row clearfix">
+                <?php foreach ($devices as $dev): ?>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="header bg-red" align="center" id="bID">
@@ -204,25 +127,24 @@
                             </h3>
                         </div>
                         <div class="body" align="center">
-                            Meja 1
+
+                            Meja <?php echo $dev['kd_device']?>
                             <br><br><br><br>
                             Kapasitas : 4 Orang
                         </div>
                         <br>
-                        <center>
-                        <BUTTON onClick="changeColor()" id="tombol">Non Aktifkan</BUTTON>
-                        </center>
                         <br>
                     </div>
                 </div>
-        	<div class="clearfix"> </div>
+            <div class="clearfix"> </div>
+        <?php endforeach ?>
      
-	</div>
+    </div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-		<div class="copy">
+        <div class="copy">
             <p>Copyright &copy; 2017 Pisang Ijo. All Rights Reserved | Design by <a href="#" target="_blank">US</a> </p>
-	    </div>
+        </div>
     <!-- /#wrapper -->
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>

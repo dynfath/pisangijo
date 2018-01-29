@@ -77,9 +77,9 @@
         <div id="page-wrapper">
         <div class="col-md-12 graphs">
 	   <div class="xs">
-  	 <h3>Basic Tables</h3>
+  	 <h3>PESANAN</h3>
   	<div class="bs-example4" data-example-id="contextual-table">
-    <table class="table">
+    <table class="table" id="order">
       <thead>
         <tr>
           <th>No</th>
@@ -88,20 +88,14 @@
           <th>Done?</th>
         </tr>
       </thead>
-      <tbody>
-        <tr class="active">
-          <th scope="row">1</th>
-          <td>Kasir</td>
-          <td>Meja 2</td>
-          <td><i class="fa fa-check-square tambah"></i></td>
-        </tr>
+        <!-- <?php $i = 1; foreach($pesanan as $pesanan) { ?>
         <tr>
-          <th scope="row">2</th>
-          <td>Chef</td>
-          <td>Meja 1</td>
+          <th><?=$i?></th>
+          <td><?= $pesanan->kd_pesanan ?></td>
+          <td><?= $pesanan->nama ?></td>
           <td><i class="fa fa-check-square tambah"></td>
         </tr>
-      </tbody>
+        <?php $i++; } ?> -->
     </table>
    </div>
 	<div class="bs-example4" data-example-id="simple-responsive-table">
@@ -114,8 +108,105 @@
     <div class="copy">
             <p>Copyright &copy; 2017 Pisang Ijo. All Rights Reserved | Design by <a href="#" target="_blank">US</a> </p>
       </div>
+
+      <div class="modal fade" id="detil-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">' +
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-shopping-cart"></span> Detil</h4>
+        </div>
+        <div class="modal-body">
+        <table class="table table-hover table-responsive" id="detil-table"></table>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+        </div>
+        </div>
+
     <!-- /#wrapper -->
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>
+    <script type="text/javascript">
+      var interval=5000;
+      function getPesanan(){
+        $.ajax({
+            url : "<?php echo base_url('Pelayan/tampilmenu');?>",
+            dataType : "json",
+            success:function(response){
+              $(".table #pesanan").remove();
+              $.each(response,function(i){
+                 var id = response[i].id_order;
+                 $("<tr id='pesanan'>").append(
+                 $("<td id='"+response[i].id_order+"'>").text(response[i].id_order),
+                 $("<td id='detil"+i+"'>").text(response[i].device),
+                 $("<td id='total_harga"+i+"'>").text(response[i].total_harga),
+                 $("<td><input type='button' class='btn btn-success' id='detilpesan' onclick=detilmenu(\""+id+"\") value='Detil'>")
+                 ).appendTo("#order")
+
+               });
+            },
+            complete:function(response){
+              setTimeout(getPesanan,interval);
+            }
+        });
+      }
+      setTimeout(getPesanan,interval);
+      
+      function detilmenu(id){
+       
+        $('#detil-modal').modal('show');
+        $.ajax({
+            url : "<?php echo base_url('Pelayan/tampildetilmenu');?>",
+            method : "POST",
+            dataType : "json",
+            data : {id : id},
+            success:function(response){
+              console.log(response)
+              $("#detil-table #pesan").remove();
+                 $("<tr id='pesan'>").append(
+                 $("<td id='apa'>").text("Kode Menu"),
+                 $("<td id='detil'>").text("Nama Menu"),
+                 $("<td id='total_harga'>").text("Jumlah"),
+                 ).appendTo("#detil-table")
+              $.each(response,function(i){
+                 $("<tr id='pesan'>").append(
+                 $("<td id='kd_pesan'>").text(response[i].kd_pesanan),
+                 $("<td id='detil"+i+"'>").text(response[i].nama),
+                 $("<td id='total_harga"+i+"'>").text(response[i].qty),
+                 ).appendTo("#detil-table")
+
+               });
+            }
+        });  
+      }
+
+      $(document).on('ready', function(){
+        getPesanan();
+
+      });
+
+      /*$(document).on('click', '#detilpesan', function(){
+        $('#detil-modal').modal('show');
+        $.ajax({
+            url : "<?php echo base_url('Pelayan/tampilmenu');?>",
+            dataType : "json",
+            success:function(response){
+              $(".table #pesanan").remove();
+              $.each(response,function(i){
+                 $("<tr id='pesanan'>").append(
+                 $("<td id='"+response[i].id_order+"'>").text(response[i].id_order),
+                 $("<td id='detil"+i+"'>").text(response[i].device),
+                 $("<td id='total_harga"+i+"'>").text(response[i].total_harga),
+                 $("<td><input type='button' class='btn btn-success' id='detilpesan' value='Detil'>")
+                 ).appendTo(".table")
+
+               });
+            }
+        });  
+      });*/
+    </script>
 </body>
 </html>

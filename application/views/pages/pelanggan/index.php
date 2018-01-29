@@ -26,6 +26,8 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 <link href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 
 <!-- js -->
 <script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js');?>"></script>
@@ -61,12 +63,9 @@
 						<div class="collapse navbar-collapse pull-left" id="nino-navbar-collapse">
 							<ul class="nav navbar-nav">
 								<li class="active"><a href="#nino-header">Home <span class="sr-only">(current)</span></a></li>
-								<li><a class="js-scroll-trigger" href="#about">About</a></li>
 								<li><a class="js-scroll-trigger" href="#menu-makanan">Pesan</a></li>
-								<li><a class="js-scroll-trigger" href="#services">Service</a></li>
-								<li><a class="js-scroll-trigger" href="#gallery">Gallery</a></li>
-								<li><a class="js-scroll-trigger" href="#feedback">Feedback</a></li>
-								<li><a class="js-scroll-trigger" href="#nino-map">Location</a></li>
+								<li><a class="js-scroll-trigger" href="#about">Tentang</a></li>
+								<li><a class="js-scroll-trigger" href="#nino-map">Lokasi</a></li>
 							</ul>
 						</div><!-- /.navbar-collapse -->
 						<ul class="nino-iconsGroup nav navbar-nav">
@@ -76,73 +75,153 @@
 				</div><!-- /.container-fluid -->
 			</nav>
  
-			<section id="nino-slider" class="carousel slide container" data-ride="carousel">
+			<section id="nino-slider" class="carousel slide container" data-ride="carousel" style="height: 200px;">
 				
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
 						<h2 class="nino-sectionHeading">
-							<span class="nino-subHeading">Selamat Datang di</span>
-							Pisang Ijo
+							<span class="nino-subHeading" style="font-family: 'Montserrat', sans-serif;">Selamat Datang</span>
 						</h2>
-						<br>
-						<br>
-						<br>
-						<br>
-						<br>
-						<a href="#about" class="nino-btn js-scroll-trigger">Disini</a>
-					</div>
-					<div class="item">
-						<h2 class="nino-sectionHeading">
-							<span class="nino-subHeading">Pesan Makanan</span>
-							Klik Disini
-						</h2>
-						<br>
-						<br>
-						<br>
-						<br>
-						<br>
-						<a href="makanan.html" class="nino-btn">Disini</a>
-					</div>
-					<div class="item">
-						<h2 class="nino-sectionHeading">
-							<span class="nino-subHeading">Lokasi</span>
-							Cek<br>Lokasi Kami
-						</h2>
-						<a href="#map" class="nino-btn js-scroll-trigger">Disini</a>
-					</div>
-					<div class="item">
-						<h2 class="nino-sectionHeading">
-							<span class="nino-subHeading">Creative Template</span>
-							Welcome <br>to MoGo
-						</h2>
-						<a href="#" class="nino-btn">Learn more</a>
 					</div>
 				</div>
 
 				<!-- Indicators -->
-				<ol class="carousel-indicators clearfix">
-					<li data-target="#nino-slider" data-slide-to="0" class="active">
-						<div class="inner">
-							<span class="number">01</span> intro	
-						</div>
-					</li>
-					<li data-target="#nino-slider" data-slide-to="1">
-						<div class="inner">
-							<span class="number">02</span> order
-						</div>
-					</li>
-					<li data-target="#nino-slider" data-slide-to="2">
-						<div class="inner">
-							<span class="number">03</span> about
-						</div>
-					</li>
-				</ol>
 			</section>
 		</div>
 	</header><!--/#header-->
 
-	<!-- Story About Us
+  <!--Menu -->
+  <section id="menu-makanan">
+  <div class="container">
+  	<br>
+
+  	    		<h2 class="nino-sectionHeading">
+				<span class="nino-subHeading">Order Page</span>
+				Pilih Menu Anda
+			</h2>
+
+        
+               
+<!--content-->
+<div class="product">
+	<div class="container ">
+  
+    <br>
+    <br>
+
+			<div class="tab-head ">
+				<nav class="nav-sidebar">
+					<center>
+					<ul class="nav tabs">
+					  <li class="active"><a href="#tab1" data-toggle="tab">Makanan</a></li>
+					  <li class=""><a href="#tab2" data-toggle="tab">Minuman</a></li> 
+					</ul>
+					</center>
+				</nav>
+				<div class=" tab-content tab-content-t ">
+					<div class="tab-pane active text-style" id="tab1">
+						<?php $i=1; ?>
+						<div class=" con-w3l ">
+							<?php foreach($makanan as $menu): ?>
+							<div class="col-md-3 m-wthree">
+								
+								<div class="col-m">								
+									<a href="#" data-toggle="modal" data-target="#myModal<?=$i?>" class="offer-img">
+										<img src="<?php echo base_url('assets/image/menu/ma1.jpg');?>" class="img-responsive" alt="">
+										<div class="offer"><p><span>Offer</span></p></div>
+									</a>
+									<div class="mid-1">
+										<div class="women">
+											<h6><a href="#"><?php echo $menu['nama_makanan']; ?></a></h6>							
+										</div>
+										<div class="mid-2">
+											<p ><em class="#"><?php echo $menu['hrg_makanan']; ?></em></p>
+											  
+											<div class="clearfix"></div>
+										</div>
+										<div class="add">
+										   <button class="btn btn-danger my-cart-btn my-cart-b " data-id="<?= $menu['kd_makanan'];?>" data-nama="<?php echo $menu['nama_makanan'];?>" data-summary="summary <?= $i ?>" data-price="<?php echo $menu['hrg_makanan']; ?>" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma1.jpg');?>">Add to Cart</button>
+										</div>	
+									</div>
+								</div>
+							 
+							</div>
+							<?php $i = $i+1; ?>
+							<?php endforeach; ?>
+							<div class="clearfix"></div>
+							
+						 </div>
+						 <br>
+						 
+					</div>
+					<div class="tab-pane  text-style" id="tab2">
+						<div class=" con-w3l">
+							<?php $i=1; ?>
+							<?php foreach($minuman as $menu): ?>
+							<div class="col-md-3 m-wthree">
+								<div class="col-m">
+									<a href="#" data-toggle="modal" data-target="#myModal<?=$i?>" class="offer-img">
+										<img src="<?php echo base_url('assets/image/menu/mi1.jpg');?>" class="img-responsive" alt="">
+										<div class="offer"><p><span>Offer</span></p></div>
+									</a>
+									<div class="mid-1">
+										<div class="women">
+											<h6><a href="#"><?php echo $menu['nama_minuman']; ?></a></h6>							
+										</div>
+										<div class="mid-2">
+											<p ><em class="item_price"><?php echo $menu['hrg_minuman']; ?></em></p>
+											<div class="clearfix"></div>
+										</div>
+											<div class="add">
+										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="<?= $menu['kd_minuman'];?>" data-nama="<?php echo $menu['nama_minuman']; ?>" data-summary="summary <?=$i?>" data-price="<?php echo $menu['hrg_minuman']; ?>" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/mi1.jpg');?>">Add to Cart</button>
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<?php $i = $i+1; ?>
+							<?php endforeach; ?>
+							<div class="clearfix"></div>
+						 </div>		  
+					</div>
+							
+					<div class="clearfix"></div>	 		 
+				</div>
+			</div>
+		
+	</div>
+	</div>
+	</div>
+	</section>
+	<!-- Menu Makanan=================================>
+
+	<!-- Counting
+    ================================================== -->
+    <section id="counting">
+    	<div class="container">
+    		<div layout="row" class="verticalStretch">
+    			<div class="item">
+    				<img src="<?php echo base_url('assets/image/menu/ma1.jpg');?>" width="100px" height="90px">
+    			</div>
+    			<div class="item">
+    				<img src="<?php echo base_url('assets/image/menu/ma4.jpg');?>" width="100px" height="90px">    			
+    			</div>
+    			<div class="item">
+    				<img src="<?php echo base_url('assets/image/menu/mi3.jpg');?>" width="100px" height="90px">
+    			</div>
+    			<div class="item">
+    				<img src="<?php echo base_url('assets/image/menu/ma1.jpg');?>" width="100px" height="90px">
+    			</div>
+    			<div class="item">
+    				<img src="<?php echo base_url('assets/image/menu/ta4.jpg');?>" width="100px" height="90px">
+    			</div>
+    		</div>
+    	</div>
+    </section><!--/#nino-counting-->
+
+    <!-- Story About Us
     ================================================== -->
 	<section id="about">
 		<div class="container">
@@ -194,200 +273,7 @@
 		</div>		
 	</section><!--/#nino-story-->
 
-  <!--Menu -->
-  <section id="menu-makanan">
-  <div class="container">
-  	<br>
-
-  	    		<h2 class="nino-sectionHeading">
-				<span class="nino-subHeading">Order Page</span>
-				Pilih Menu Anda
-			</h2>
-
-        
-               
-<!--content-->
-<div class="product">
-	<div class="container ">
-		<div class="input-group input-cari">
-      <input type="text" class="form-control" placeholder="Cari sesuatu..." aria-label="Cari Sesuatu...">
-      <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button">Cari</button>
-      </span>				
-    </div>  
-    <br>
-    <br>
-    <br>
-			<div class="tab-head ">
-				<nav class="nav-sidebar">
-					<center>
-					<ul class="nav tabs">
-					  <li class="active"><a href="#tab1" data-toggle="tab">Makanan</a></li>
-					  <li class=""><a href="#tab2" data-toggle="tab">Minuman</a></li> 
-					</ul>
-					</center>
-				</nav>
-					<div class=" tab-content tab-content-t ">
-
-					<!--TAB1-->
-					<div class="tab-pane active text-style" id="tab1">
-						<div class=" con-w3l">
-						<?php foreach ($makanan as $menuItem): ?>
-
-                        
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-                            
-                                <img src="<?php echo $menuItem['g_makanan'] ?>"/>
-                                <figcaption>
-                                    <span><?php echo $menuItem['nama_makanan']; ?></span><br>
-                                    <span><?php echo $menuItem['hrg_makanan'] ?></span>
-                                </figcaption>
-
-                                <div class="pesan">
-                                    <i class="fa fa-cart-plus"></i><span>Pesan</span>
-                                </div>
-                            </figure>
-                            	</div>
-
-                        	</div>
-                        <?php endforeach; ?>
-                    
-                        </div>
-                    </div>
-                	<!--/TAB1-->
-
-                	<!--TAB2-->
-                	<div class="tab-pane active text-style" id="tab2">
-						<div class=" con-w3l">
-						<?php foreach ($minuman as $menuItem): ?>
-
-                        
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-                            
-                                <img src="<?php echo $menuItem['g_minuman'] ?>"/>
-                                <figcaption>
-                                    <span><?php echo $menuItem['nama_minuman']; ?></span><br>
-                                    <span><?php echo $menuItem['hrg_minuman'] ?></span>
-                                </figcaption>
-
-                                <div class="pesan">
-                                    <i class="fa fa-cart-plus"></i><span>Pesan</span>
-                                </div>
-                            </figure>
-                            	</div>
-
-                        	</div>
-                        <?php endforeach; ?>
-                    
-                        </div>
-                    </div>
-                	<!--/TAB2-->
-                	<div class="tab-pane active text-style" id="tab2">
-                	</div>
-                	</div>	
-        	</div>
-   		</div>
-	</div>
-</div>
-	</section>
-	<!-- Menu Makanan=================================>
-
-	<!-- Counting
-    ================================================== -->
-    <section id="counting">
-    	<div class="container">
-    		<div layout="row" class="verticalStretch">
-    			<div class="item">
-    				<img src="<?php echo base_url('assets/image/menu/ma1.jpg');?>" width="100px" height="90px">
-    			</div>
-    			<div class="item">
-    				<img src="<?php echo base_url('assets/image/menu/ma4.jpg');?>" width="100px" height="90px">    			
-    			</div>
-    			<div class="item">
-    				<img src="<?php echo base_url('assets/image/menu/mi3.jpg');?>" width="100px" height="90px">
-    			</div>
-    			<div class="item">
-    				<img src="<?php echo base_url('assets/image/menu/ma1.jpg');?>" width="100px" height="90px">
-    			</div>
-    			<div class="item">
-    				<img src="<?php echo base_url('assets/image/menu/ta4.jpg');?>" width="100px" height="90px">
-    			</div>
-    		</div>
-    	</div>
-    </section><!--/#nino-counting-->
-
-    <!-- Services
-    ================================================== -->
-    <section id="services">
-    	<div class="container">
-    		<h2 class="nino-sectionHeading">
-				<span class="nino-subHeading">Kita Menyediakan</span>
-				Makanan Yang...
-			</h2>
-			<div class="sectionContent">			
-				<div class="fw" layout="row">
-					<div class="col-md-4 col-sm-6 item ">
-						<div layout="row">
-							<i class="mdi mdi-approval nino-icon fsr"></i>
-							<div>
-								<h4 class="nino-serviceTitle">Halal</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 item ">
-						<div layout="row">
-							<i class="mdi mdi-heart nino-icon fsr"></i>
-							<div>
-								<h4 class="nino-serviceTitle">Sehat</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 item ">
-						<div layout="row">
-							<i class="mdi mdi-skull nino-icon fsr"></i>
-							<div>
-								<h4 class="nino-serviceTitle">Tanpa Bahan Pengawet</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 item ">
-						<div layout="row">
-							<i class="mdi mdi-thumb-up nino-icon fsr"></i>
-							<div>
-								<h4 class="nino-serviceTitle">Lezat</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 item ">
-						<div layout="row">
-							<i class="mdi mdi-emoticon-excited nino-icon fsr"></i>
-							<div>
-								<h4 class="nino-serviceTitle">Murah</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 item ">
-						<div layout="row">
-							<i class="mdi mdi-silverware-variant nino-icon fsr"></i>
-							<div>
-								<h4 class="nino-serviceTitle">Cocok</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-    	</div>
-    </section><!--/#nino-services-->
-
-    <!-- Testimonial
+	<!-- Testimonial
     ================================================== -->
     <section class="QUOTE">
     	<div class="container">
@@ -430,180 +316,6 @@
 			</div>
     	</div>
     </section><!--/#nino-testimonial-->
-	<!-- Portfolio
-    ================================================== -->
-	<section id="gallery">
-		<div class="container">
-			<h2 class="nino-sectionHeading">
-				<span class="nino-subHeading">Galeri Mini</span>
-				Beberapa menu
-			</h2>
-			<p class="nino-sectionDesc">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-			</p>
-		</div>
-		<div class="sectionContent">
-			<ul class="nino-portfolioItems">
-				<li class="item">
-					<a class="nino-prettyPhoto" rel="prettyPhoto[gallery1]" title="Es Cendol" href="<?php echo base_url('assets/image/galeri/3.jpg');?>">
-						<img src="<?php echo base_url('assets/image/galeri/3.jpg');?>" />
-						<div class="overlay">
-							<div class="content">
-								<i class="mdi mdi-cube-outline nino-icon"></i>
-								<h4 class="title">Es Cendol</h4>
-								<span class="desc">Lorem ipsum dolor sit</span>
-							</div>
-						</div>
-					</a>
-				</li>
-				<li class="item">
-					<a class="nino-prettyPhoto" rel="prettyPhoto[gallery1]" title="Jus Alpukat" href="<?php echo base_url('assets/image/galeri/1.jpg');?>">
-						<img src="<?php echo base_url('assets/image/galeri/1.jpg');?>" />
-						<div class="overlay">
-							<div class="content">
-								<i class="mdi mdi-gnome nino-icon"></i>
-								<h4 class="title">Jus Alpukat</h4>
-								<span class="desc">Lorem ipsum dolor sit</span>
-							</div>
-						</div>
-					</a>
-				</li>
-				<li class="item">
-					<a class="nino-prettyPhoto" rel="prettyPhoto[gallery1]" title="Batagor" href="<?php echo base_url('assets/image/galeri/2.jpg');?>">
-						<img src="<?php echo base_url('assets/image/galeri/2.jpg');?>" />
-						<div class="overlay">
-							<div class="content">
-								<i class="mdi mdi-cube-outline nino-icon"></i>
-								<h4 class="title">Batagor</h4>
-								<span class="desc">Lorem ipsum dolor sit</span>
-							</div>
-						</div>
-					</a>
-				</li>
-				<li class="item">
-					<a class="nino-prettyPhoto" rel="prettyPhoto[gallery1]" title="Gurame Bakar" href="<?php echo base_url('assets/image/galeri/4.jpg');?>">
-						<img src="<?php echo base_url('assets/image/galeri/4.jpg');?>" />
-						<div class="overlay">
-							<div class="content">
-								<i class="mdi mdi-gnome nino-icon"></i>
-								<h4 class="title">Gurame Bakar</h4>
-								<span class="desc">Lorem ipsum dolor sit</span>
-							</div>
-						</div>
-					</a>
-				</li>
-				<li class="item">
-					<a class="nino-prettyPhoto" rel="prettyPhoto[gallery1]" title="Minuman Segar" href="<?php echo base_url('assets/image/galeri/5.jpg');?>">
-						<img src="<?php echo base_url('assets/image/galeri/5.jpg');?>" />
-						<div class="overlay">
-							<div class="content">
-								<i class="mdi mdi-cube-outline nino-icon"></i>
-								<h4 class="title">Minuman Segar</h4>
-								<span class="desc">Lorem ipsum dolor sit</span>
-							</div>
-						</div>
-					</a>
-				</li>
-				<li class="item">
-					<a class="nino-prettyPhoto" rel="prettyPhoto[gallery1]" title="Martabak" href="<?php echo base_url('assets/image/galeri/6.jpg');?>">
-						<img src="<?php echo base_url('assets/image/galeri/6.jpg');?>" />
-						<div class="overlay">
-							<div class="content">
-								<i class="mdi mdi-gnome nino-icon"></i>
-								<h4 class="title">Martabak Telor</h4>
-								<span class="desc">Lorem ipsum dolor sit</span>
-							</div>
-						</div>
-					</a>
-				</li>
-				<li class="item">
-					<a class="nino-prettyPhoto" rel="prettyPhoto[gallery1]" title="Jus Buah" href="../image/galeri/7.jpg">
-						<img src="<?php echo base_url('assets/image/galeri/7.jpg');?>" />
-						<div class="overlay">
-							<div class="content">
-								<i class="mdi mdi-guitar-electric nino-icon"></i>
-								<h4 class="title">Jus Buah Segar</h4>
-								<span class="desc">Lorem ipsum dolor sit</span>
-							</div>
-						</div>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</section><!--/#nino-portfolio-->
-    <br>
-    <!-- Happy Client
-    ================================================== -->
-    <section id="feedback">
-    	<div class="container">
-    		<h2 class="nino-sectionHeading">
-				<span class="nino-subHeading">Sedikit Ulasan</span>
-				Pengunjung yang pernah datang
-			</h2>
-			<div class="sectionContent">
-				<div class="row">
-					<div class="col-md-6">
-						<div layout="row" class="item">
-							<div class="nino-avatar fsr">
-								<img class="img-circle" src="images/happy-client/img-1.jpg" alt="">
-							</div>
-							<div class="info">
-								<h4 class="name">Matthew Sukiman</h4>
-								<span class="regency">Tentang Makanan</span>
-								<p class="desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo illo cupiditate temporibus sapiente, sint, voluptatibus tempora esse. Consectetur voluptate nihil quo nulla voluptatem dolorem harum nostrum
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div layout="row" class="item">
-							<div class="nino-avatar fsr">
-								<img class="img-circle" src="images/happy-client/img-2.jpg" alt="">
-							</div>
-							<div class="info">
-								<h4 class="name">Ujang Karvounis</h4>
-								<span class="regency">Tentang Makanan</span>
-								<p class="desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo illo cupiditate temporibus sapiente, sint, voluptatibus tempora esse. Consectetur voluptate nihil quo nulla voluptatem dolorem harum nostrum
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div layout="row" class="item">
-							<div class="nino-avatar fsr">
-								<img class="img-circle" src="images/happy-client/img-3.jpg" alt="">
-							</div>
-							<div class="info">
-								<h4 class="name">Jamilah Castillo</h4>
-								<span class="regency">Tentang Makanan</span>
-								<p class="desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo illo cupiditate temporibus sapiente, sint, voluptatibus tempora esse. Consectetur voluptate nihil quo nulla voluptatem dolorem harum nostrum
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div layout="row" class="item">
-							<div class="nino-avatar fsr">
-								<img class="img-circle" src="images/happy-client/img-4.jpg" alt="">
-							</div>
-							<div class="info">
-								<h4 class="name">Usep Petrucci</h4>
-								<span class="regency">Tentang Makanan</span>
-								<p class="desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo illo cupiditate temporibus sapiente, sint, voluptatibus tempora esse. Consectetur voluptate nihil quo nulla voluptatem dolorem harum nostrumasd
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-    	</div>
-    </section><!--/#nino-happyClient-->
 
     <!-- Map
     ================================================== -->
@@ -665,7 +377,7 @@
 		</div>
 		<div class="clearfix"></div>
 			<div class="footer-bottom">
-            <a href="index.html"><img src="../image/header.png" height="70px" width="220px"></img></a>
+            <a href="index.html"><img src="<?php echo base_url('assets/image/header.png');?>" height="70px" width="220px"></img></a>
 				<p class="fo-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
 				<ul class="social-fo">
 					<li><a href="#" class=" face"><i class="mdi mdi-facebook" aria-hidden="true"></i></a></li>
@@ -729,14 +441,7 @@
     </script> 
 	<script type="text/javascript">
 		$(document).ready(function() {
-		/*
-			var defaults = {
-			containerID: 'toTop', // fading element id
-			containerHoverID: 'toTopHover', // fading element hover id
-			scrollSpeed: 1200,
-			easingType: 'linear' 
-			};
-		*/								
+									
 		$().UItoTop({ easingType: 'easeOutQuart' });
 		});
 	</script>
@@ -745,48 +450,140 @@
 <!-- for bootstrap working -->
 		<script src="<?php echo base_url('assets/js/bootstrap.js');?>"></script>
 <!-- //for bootstrap working -->
-<script type='text/javascript' src="<?php echo base_url('assets/js/jquery.mycart.js');?>"></script>
+	<script type='text/javascript' src="<?php echo base_url('assets/js/jquery.mycart.js');?>"></script>
+	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
   <script type="text/javascript">
-  $(function () {
-
-    var goToCartIcon = function($addTocartBtn){
-      var $cartIcon = $(".my-cart-icon");
-      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "9999"});
-      $addTocartBtn.prepend($image);
-      var position = $cartIcon.position();
-      $image.animate({
-        top: position.top,
-        left: position.left
-      }, 500 , "linear", function() {
-        $image.remove();
-      });
-    }
-
-    $('.my-cart-btn').myCart({
-      classCartIcon: 'my-cart-icon',
-      classCartBadge: 'my-cart-badge',
-      affixCartIcon: true,
-      checkoutCart: function(products) {
-        $.each(products, function(){
-          console.log(this);
+  function getJumlah(){
+        $.ajax({
+            url:"<?php echo base_url('Pelanggan/getjmlpesan') ?>",
+            method:"GET",
+            success:function(data)
+            {
+                $('.my-cart-badge').text(data);
+            }
         });
-      },
-      clickOnAddToCart: function($addTocart){
-        goToCartIcon($addTocart);
-      },
-      getDiscountPrice: function(products) {
-        var total = 0;
-        $.each(products, function(){
-          total += this.quantity * this.price;
-        });
-        return total * 1;
-      }
-    });
+  		}
 
+  $(document).ready(function(){
+  	getJumlah();
+  	//klik add
+  	$(document).on('click','.my-cart-btn', function(){
+  		var id = $(this).data('id');
+  		var nama = $(this).data('nama');
+  		var qty = $(this).data('quantity');
+  		var harga = $(this).data('price');
+  	
+  		var data = {
+  			id:id,
+  			nama:nama,
+  			qty:qty,
+  			harga:harga
+  		}
+
+  		$.ajax({
+            url:"<?php echo base_url('Pelanggan/order') ?>",
+            method:"POST",
+            data: data,
+            success:function(data)
+            {
+           	  console.log(data);
+			  getJumlah();
+            }
+  		});
+  	});
+  	
   });
-  </script>
-  
+
+
+  	function hapusOrder(id) {
+  		getJumlah();
+  		$.ajax({
+            url:"<?php echo base_url('Pelanggan/hapusOrder') ?>",
+            method:"POST",
+            dataType : "json",
+            data: {id: id},
+            success: function(response){
+            	console.log(response);
+            	$('.'+response.rowid).fadeOut();
+            	getJumlah();
+            }
+        });
+  		
+  	}
+
+
+
+  //fungsi mychart
+  $(document).on('click','.my-cart-icon', function(){
+  	$('#my-cart-modal').modal('show');
+      console.log('hai');
+      $.ajax({
+            url:"<?php echo base_url('Pelanggan/listpesan') ?>",
+            method:"POST",
+            dataType : "json",
+            success:function(data)
+            {
+            	var html = '';
+            	$('#my-cart-table').empty();
+            	$.each(data, function() {
+			        var total = this.qty * this.price;
+			        var id = '' + this.rowid + '';
+			        html += '<tr class="'+id+'" title="" data-id="' + id + '" data-price="' + this.price + '">';
+			        html += '<td class="text-center" style="width: 30px;"><img width="30px" height="30px" src=""/></td>';
+			        html += '<td>' + this.name + '</td>';
+			        html += '<td title="Unit Price">Rp.' + this.price + '</td>';
+			        html += '<td title="Quantity"><input type="number" min="1" style="width: 70px; height: 20px; font-size : 10px; text-align:center;" class="my-product-quantity" value="' + this.qty + '"/></td>';
+			        html += '<td title="Total" class="my-product-total">Rp.' + total + '  rb</td>';
+			        html += '<td title="Remove from Cart" class="text-center" style="width: 30px;"><button class="btn btn-xs btn-danger my-product-remove" onclick="hapusOrder(\'' + id + '\');">X</button></td>';
+			        html += '</tr>';
+		      	});
+            $('#my-cart-table').append(html);
+           	  console.log(data);
+            }
+  		});
+
+  	});
+  	//kirim data cart ke database
+  	$(document).on('click','#confirm', function(){
+  		$.ajax({
+            url:"<?php echo base_url('Pelanggan/inspesan') ?>",
+            method:"POST",
+            dataType : "json",
+            success: function(response){
+            	swal({
+                        title: "Pesanan Berhasil",
+                        type: "success",
+                    });
+            }
+        });
+  	});  	
+
+
+   </script>
+  <!-- modal pesan -->
+		<div class="modal fade" id="my-cart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">' +
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-shopping-cart"></span> My Cart</h4>
+        </div>
+        <div class="modal-body">
+        <table class="table table-hover table-responsive" id="my-cart-table"></table>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" id="confirm">Confirm</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+  <!-- /modal -->
   <!-- product -->
+ <!--  <form method="POST" action="<?= base_url('Pelanggan/inspesan');?>"><button type="submit" class="btn btn-success" data-dismiss="modal" id="confirm">Confirm</button></form> -->
+  
 			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content modal-info">

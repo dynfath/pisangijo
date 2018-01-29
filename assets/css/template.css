@@ -1,7 +1,6 @@
 /* ============================== DEFAULT HTML ============================== */
 @import 'https://fonts.googleapis.com/css?family=Montserrat:400,700';
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700';
-@import 'https://fonts.googleapis.com/css?family=Gochi+Hand';
 @import 'https://fonts.googleapis.com/css?family=Montserrat+Alternates';
 html, body {
 	line-height: 1.7;
@@ -425,12 +424,13 @@ section {
 	height: 2px;
 	background: #f38181;
 	transform: translateX(-50%);
+	font-family: 'Montserrat Alternates', sans-serif;
 }
 .nino-sectionHeading .nino-subHeading {
 	display: block;
 	text-transform: none;
 	font-weight: 400;
-	font-family: 'Gochi Hand', cursive;
+	font-family: 'Roboto', Roboto;
 	font-size: 20px;
 	margin-bottom: 20px;
 }
@@ -1133,9 +1133,10 @@ div.pp_default .pp_social {
 	/* =============== MAIN SLIDER =============== */
 	#nino-slider {
 		padding-top: 10px;
+		height: 200px;
 	}
 	#nino-slider .carousel-inner {
-		height: 440px;
+		height: 200px;
 	}
 	#nino-slider .carousel-indicators {
 		width: 100%;

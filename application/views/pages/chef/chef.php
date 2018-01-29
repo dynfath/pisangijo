@@ -23,7 +23,7 @@
 <script src="<?php echo base_url('assets/js/metisMenu.min.js');?>"></script>
 <script src="<?php echo base_url('assets/js/custom.js');?>"></script>
 <script type='text/javascript'>
-    $(document).on('click','input[type=button]', function() {
+    /*$(document).on('click','input[type=button]', function() {
                buttonVal = $(this).val();
     if(buttonVal == 'Pilih' )
     {
@@ -60,7 +60,7 @@
      $("#closeButton").click(function() {
        $("#ket").text("Tersedia");
      }) 
-   });
+   });*/
 </script>
 </head>
 
@@ -91,7 +91,7 @@
 						<li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
 						<li class="divider"></li>
 						<li class="m_2"><a href="#"><i class="fa fa-shield"></i> Lock Profile</a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-lock"></i> Logout</a></li>	
+						<li class="m_2"><a href="<?= base_url('login/destroy');?>"><i class="fa fa-lock" ></i> Logout</a></li>	
 	        		</ul>
 	      		</li>
 			</ul>
@@ -113,107 +113,53 @@
         </nav>
         <div id="page-wrapper">
         <div class="graphs">
-            <h3>Cek Meja</h3>
+            <h3>List Pesanan</h3>
             <br>
      	<div class="row clearfix">
+            <?php foreach ($list as $list) {
+            ?>
         	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="header bg-red" align="center" id="bID">
                             <h3 class="ketersediaan" id="ket">
-                                Tersedia
+                                <?= $list->device?>
                             </h3>
                         </div>
-                        <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
+                        <div class="daftar" align="center">
+                            Daftar Pesanan
+                        </div>
+                        <div class="body" align="left" >
+                             <?php
+                                $test = $list->id_order;
+                                $i = 1;
+                                 foreach ($detil as $value) {
+                                    if ($value->id_order == $test) {
+                                        echo $i;
+                                        echo ". ";
+                                        echo $value->nama;
+                                        $i++?><br>
+
+                                    <?php
+                                    }
+                                     
+                                 }
+                             ?>
                         </div>
                         <br>
                         <center>
-                        <input type="button" onclick="changeColor()" value="Pilih" id="openButton" name="openButton">
+                        <form method="post" action="<?= base_url('Chef/getdone');?>">
+                        <input type="submit" onclick="changeColor()" value="Selesai" id="openButton" name="openButton">
                         <input type="button" onclick="changeColor()" value="Buka" id="closeButton" name="closeButton" hidden="true" disabled="disabled">
+                        <input type="hidden" value="<?= $list->id_order; ?>" name="id_order" hidden="true">
+                        </form>
                         </center>
                         <br>
                     </div>
                 </div>
-        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="header bg-red" align="center" id="bID">
-                            <h3 class="ketersediaan" id="ket">
-                                Tersedia
-                            </h3>
-                        </div>
-                        <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
-                        </div>
-                        <br>
-                        <center>
-                        <input type="button" onclick="changeColor()" value="Pilih" id="openButton" name="openButton">
-                        <input type="button" onclick="changeColor()" value="Buka" id="closeButton" name="closeButton" hidden="true" disabled="disabled">
-                        </center>
-                        <br>
-                    </div>
-                </div>
-        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="header bg-red" align="center" id="bID">
-                            <h3 class="ketersediaan" id="ket">
-                                Tersedia
-                            </h3>
-                        </div>
-                        <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
-                        </div>
-                        <br>
-                        <center>
-                        <BUTTON onClick="changeColor()" id="tombol">Non Aktifkan</BUTTON>
-                        </center>
-                        <br>
-                    </div>
-                </div>
-        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="header bg-red" align="center" id="bID">
-                            <h3 class="ketersediaan" id="ket">
-                                Tersedia
-                            </h3>
-                        </div>
-                        <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
-                        </div>
-                        <br>
-                        <center>
-                        <BUTTON onClick="changeColor()" id="tombol">Non Aktifkan</BUTTON>
-                        </center>
-                        <br>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="header bg-red" align="center" id="bID">
-                            <h3 class="ketersediaan" id="ket">
-                                Tersedia
-                            </h3>
-                        </div>
-                        <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
-                        </div>
-                        <br>
-                        <center>
-                        <BUTTON onClick="changeColor()" id="tombol">Non Aktifkan</BUTTON>
-                        </center>
-                        <br>
-                    </div>
-                </div>
-        	<div class="clearfix"> </div>
+                <?php } ?>        	
+
+
+
      
 	</div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br>

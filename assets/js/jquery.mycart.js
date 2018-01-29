@@ -186,7 +186,7 @@
         '</div>' +
         '<div class="modal-footer">' +
         '<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>' +
-        '<button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>' +
+        '<button type="button" class="btn btn-success" data-dismiss="modal" id="confirm">Confirm</button>' +
         '</div>' +
         '</div>' +
         '</div>' +
@@ -194,6 +194,7 @@
       );
     }
 
+    
     var drawTable = function(){
       var $cartTable = $("#" + idCartTable);
       $cartTable.empty();
@@ -242,6 +243,7 @@
       showGrandTotal();
       showDiscountPrice();
     }
+
     var showModal = function(){
       drawTable();
       $("#" + idCartModal).modal('show');
@@ -319,6 +321,12 @@
       ProductManager.clearProduct();
       $cartBadge.text(ProductManager.getTotalQuantity());
       $("#" + idCartModal).modal("hide");
+    });
+
+    $(document).on('click', "#confirm", function(){
+      console.log("disini");
+      var $id = this.id;
+      console.log(id);
     });
 
   }
