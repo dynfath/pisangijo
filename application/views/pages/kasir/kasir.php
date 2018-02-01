@@ -23,44 +23,7 @@
 <script src="<?php echo base_url('assets/js/metisMenu.min.js');?>"></script>
 <script src="<?php echo base_url('assets/js/custom.js');?>"></script>
 <script type='text/javascript'>
-  /*  $(document).on('click','input[type=button]', function() {
-               buttonVal = $(this).val();
-    if(buttonVal == 'Pilih' )
-    {
-        $(this).prop("disabled", true);
-        $('#closeButton').prop("disabled", false);
-        $(this).prop("hidden", true);
-        $('#closeButton').prop("hidden", false);
-    }
-    else
-    {
-         $('#closeButton').prop("disabled", true);
-         $('#closeButton').prop("hidden", true);
-         $('#openButton').prop("disabled", false);
-         $('#openButton').prop("hidden", false);
-    }
-});
 
-   var toggle = true;
-        function changeColor()
-        {
-            document.getElementById('bID').style.background =
-            toggle ? "red" : "green";
- 
-            toggle = !toggle;
-        }
-
-    $(document).ready(function() {
-     $("#openButton").click(function() {
-       $("#ket").text("NA");
-     }) 
-   });
-
-    $(document).ready(function() {
-     $("#closeButton").click(function() {
-       $("#ket").text("Tersedia");
-     }) 
-   });*/
 </script>
 </head>
 
@@ -117,7 +80,10 @@
             <br>
      	<div class="row clearfix">
             <?php foreach ($list as $list) {
+                $totalbayar=0;
+                $temp = $list->device;
             ?>
+                
         	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="header bg-red" align="center" id="bID">
@@ -126,14 +92,39 @@
                             </h3>
                         </div>
                         <div class="body" align="center">
-                            Meja 1
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
+                            <table class="table table-responsive">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Harga</th>
+                                    <th>Jumlah</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                                <?php foreach ($total as $bayar) {
+                                    if ($bayar->device == $temp){
+                                        $totalbayar = $totalbayar + $bayar->total_harga;
+                                        foreach ($detil as $datamenu) {
+                                            if ($datamenu->id_order == $bayar->id_order) {?>
+                                                <tr>
+                                                    <td><?=$datamenu->nama_menu?></td>    
+                                                    <td><?=$datamenu->harga?></td>    
+                                                    <td><?=$datamenu->qty?></td>    
+                                                    <td><?=$datamenu->subtotal?></td>    
+                                                </tr>
+                                           <?php }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </table>
+                            <h4>Total Harga : <?= $totalbayar ?><h4>
                         </div>
                         <br>
                         <center>
-                        <input type="button" onclick="changeColor()" value="Pilih" id="openButton" name="openButton">
-                        <input type="button" onclick="changeColor()" value="Buka" id="closeButton" name="closeButton" hidden="true" disabled="disabled">
+                        <form method="post" action="<?= base_url('Kasir/bayar');?>">
+                        <input type="submit" value="Bayar" id="openButton" name="openButton">
+                        <input type="button" value="Buka" id="closeButton" name="closeButton" hidden="true" disabled="disabled">
+                        <input type="hidden" value="<?= $list->device; ?>" name="bayar" hidden="true">
+                        </form>
                         </center>
                         <br>
                     </div>

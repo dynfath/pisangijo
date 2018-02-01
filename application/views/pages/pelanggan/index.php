@@ -571,6 +571,7 @@
 			                        type: "success",
 			                    });
 			            	getJumlah();
+			            	console.log(response);
 			            }
 			        });	
   				}
@@ -586,18 +587,37 @@
             method:"POST",
             dataType : "json",
             success: function(response){
+            	$('#modalbodynota').empty();
+            	var totalbayar = 0;
             	$.each(response.order,function(i) {
             	 console.log(response.order[i].id_order);
-            	 $('<p>').text(response.order[i].id_order).appendTo('#modalbodynota');
+            	 if (response.order[i].status == 0) {
+            	 	$('<h5>').text(i+1+'. Pesanan dalam Waiting List').appendTo('#modalbodynota');
+            	 } else {
+            	 	$('<h5>').text(i+1+'. Telah Disajikan').appendTo('#modalbodynota');
+            	 }
+            	 $('<table class="table table-responsive" id="my-nota-table'+i+'">').appendTo('#modalbodynota');
+            	 $('<tr>').append(
+            	 	$('<th>').text('Nama'),
+            	 	$('<th>').text('Harga'),
+            	 	$('<th>').text('Jumlah'),
+            	 	$('<th>').text('Subtotal')
+            	 	).appendTo('#my-nota-table'+i);
             		 $.each(response.pesan,function(j) {
             		 	if (response.order[i].id_order == response.pesan[j].id_order) {
-            		 		console.log(response.pesan[j].id_menu);
-            		 		$('<p>').text(response.pesan[j].id_menu).appendTo('#modalbodynota');
+            		 		$('<tr>').append(
+			            	 	$('<td>').text(response.pesan[j].nama_menu),
+			            	 	$('<td>').text(response.pesan[j].harga),
+			            	 	$('<td>').text(response.pesan[j].qty),
+			            	 	$('<td>').text(response.pesan[j].subtotal)
+			            	 	).appendTo('#my-nota-table'+i);
             		 	}
             		 	
             		 });
-
+            		totalbayar = parseInt(totalbayar) + parseInt(response.order[i].total_harga);
+            		console.log(totalbayar);
             	});
+            	$('<h5>').text('Total Bayar : '+totalbayar).appendTo('#modalbodynota');
             }
         });	
   	});

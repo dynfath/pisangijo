@@ -83,4 +83,23 @@ class Pelanggan extends CI_Controller {
 		echo json_encode($get);
 	}
 
+	function sessionidorder(){
+		$id = $this->session->userdata('id_order');
+		print_r($id);
+	}
+	function ujidata(){
+		$ada_id = $this->session->userdata('id_order');
+		$data = array(
+			'id_order' => $ada_id,
+			'status' => '0'
+			 );
+		$row = $this->db->get_where('pesanan',$data);
+		$rowdata = $row->result_array();
+		echo $ada_id;
+		echo "<br>";
+		print_r($rowdata);
+		echo count($rowdata);
+	}
+
+
 }
