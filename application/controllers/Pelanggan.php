@@ -27,6 +27,7 @@ class Pelanggan extends CI_Controller {
 		
 	}
 
+
 	public function order(){
 		
 		$data = array(

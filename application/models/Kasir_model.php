@@ -14,7 +14,7 @@ class Kasir_model extends CI_Model
 	function listbayar()
 	{
 		$this->db->select('*');
-		$this->db->from('order');
+		$this->db->from('pesanan');
 		$this->db->where('status','1');
 		$this->db->order_by('waktu','asc');
 		$query = $this->db->get();

@@ -14,7 +14,7 @@ class Chef_model extends CI_Model
 	function listpesan()
 	{
 		$this->db->select('*');
-		$this->db->from('order');
+		$this->db->from('pesanan');
 		$this->db->where('status','0');
 		$this->db->order_by('waktu','asc');
 		$query = $this->db->get();
@@ -24,7 +24,7 @@ class Chef_model extends CI_Model
 	public function getjoinlist()
 	{
 		$this->db->select('*');
-		$this->db->from('pesan');
+		$this->db->from('detail_pesanan');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -33,7 +33,7 @@ class Chef_model extends CI_Model
 	{
 		$data = array('status' => '1' );
 		$this->db->where('id_order', $id);
-		$this->db->update('order', $data);		
+		$this->db->update('pesanan', $data);		
 	}
 
 }

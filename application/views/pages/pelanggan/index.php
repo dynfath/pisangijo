@@ -136,15 +136,15 @@
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="#"><?php echo $menu['nama_makanan']; ?></a></h6>							
+											<h6><a href="#"><?php echo $menu['nama_menu']; ?></a></h6>							
 										</div>
 										<div class="mid-2">
-											<p ><em class="#"><?php echo $menu['hrg_makanan']; ?></em></p>
+											<p ><em class="#"><?php echo $menu['harga']; ?></em></p>
 											  
 											<div class="clearfix"></div>
 										</div>
 										<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b " data-id="<?= $menu['kd_makanan'];?>" data-nama="<?php echo $menu['nama_makanan'];?>" data-summary="summary <?= $i ?>" data-price="<?php echo $menu['hrg_makanan']; ?>" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma1.jpg');?>">Add to Cart</button>
+										   <button class="btn btn-danger my-cart-btn my-cart-b " data-id="<?= $menu['id_menu'];?>" data-nama="<?php echo $menu['nama_menu'];?>" data-summary="summary <?= $i ?>" data-price="<?php echo $menu['harga']; ?>" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma1.jpg');?>">Add to Cart</button>
 										</div>	
 									</div>
 								</div>
@@ -170,14 +170,14 @@
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="#"><?php echo $menu['nama_minuman']; ?></a></h6>							
+											<h6><a href="#"><?php echo $menu['nama_menu']; ?></a></h6>							
 										</div>
 										<div class="mid-2">
-											<p ><em class="item_price"><?php echo $menu['hrg_minuman']; ?></em></p>
+											<p ><em class="item_price"><?php echo $menu['harga']; ?></em></p>
 											<div class="clearfix"></div>
 										</div>
 											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="<?= $menu['kd_minuman'];?>" data-nama="<?php echo $menu['nama_minuman']; ?>" data-summary="summary <?=$i?>" data-price="<?php echo $menu['hrg_minuman']; ?>" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/mi1.jpg');?>">Add to Cart</button>
+										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="<?= $menu['id_menu'];?>" data-nama="<?php echo $menu['nama_menu']; ?>" data-summary="summary <?=$i?>" data-price="<?php echo $menu['harga']; ?>" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/mi1.jpg');?>">Add to Cart</button>
 
 										</div>
 
@@ -591,8 +591,8 @@
             	 $('<p>').text(response.order[i].id_order).appendTo('#modalbodynota');
             		 $.each(response.pesan,function(j) {
             		 	if (response.order[i].id_order == response.pesan[j].id_order) {
-            		 		console.log(response.pesan[j].kd_pesanan);
-            		 		$('<p>').text(response.pesan[j].kd_pesanan).appendTo('#modalbodynota');
+            		 		console.log(response.pesan[j].id_menu);
+            		 		$('<p>').text(response.pesan[j].id_menu).appendTo('#modalbodynota');
             		 	}
             		 	
             		 });
@@ -628,7 +628,7 @@
 	        <div class="modal-dialog" role="document">' 
 		        <div class="modal-content">
 			        <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel2"><span class=""></span> Nota Pembayaran </h4>
 			        </div>
 			        <div class="modal-body" id="modalbodynota">

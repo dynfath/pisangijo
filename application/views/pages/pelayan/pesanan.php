@@ -173,8 +173,8 @@
                  ).appendTo("#detil-table")
               $.each(response,function(i){
                  $("<tr id='pesan'>").append(
-                 $("<td id='kd_pesan'>").text(response[i].kd_pesanan),
-                 $("<td id='detil"+i+"'>").text(response[i].nama),
+                 $("<td id='kd_pesan'>").text(response[i].id_menu),
+                 $("<td id='detil"+i+"'>").text(response[i].nama_menu),
                  $("<td id='total_harga"+i+"'>").text(response[i].qty),
                  ).appendTo("#detil-table")
 

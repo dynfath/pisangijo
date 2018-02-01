@@ -23,44 +23,6 @@
 <script src="<?php echo base_url('assets/js/metisMenu.min.js');?>"></script>
 <script src="<?php echo base_url('assets/js/custom.js');?>"></script>
 <script type='text/javascript'>
-    /*$(document).on('click','input[type=button]', function() {
-               buttonVal = $(this).val();
-    if(buttonVal == 'Pilih' )
-    {
-        $(this).prop("disabled", true);
-        $('#closeButton').prop("disabled", false);
-        $(this).prop("hidden", true);
-        $('#closeButton').prop("hidden", false);
-    }
-    else
-    {
-         $('#closeButton').prop("disabled", true);
-         $('#closeButton').prop("hidden", true);
-         $('#openButton').prop("disabled", false);
-         $('#openButton').prop("hidden", false);
-    }
-});
-
-   var toggle = true;
-        function changeColor()
-        {
-            document.getElementById('bID').style.background =
-            toggle ? "red" : "green";
- 
-            toggle = !toggle;
-        }
-
-    $(document).ready(function() {
-     $("#openButton").click(function() {
-       $("#ket").text("NA");
-     }) 
-   });
-
-    $(document).ready(function() {
-     $("#closeButton").click(function() {
-       $("#ket").text("Tersedia");
-     }) 
-   });*/
 </script>
 </head>
 
@@ -126,24 +88,33 @@
                             </h3>
                         </div>
                         <div class="daftar" align="center">
-                            Daftar Pesanan
+                            <h4>Daftar Pesanan<h4>
                         </div>
                         <div class="body" align="left" >
+                            <table class="table">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Makanan</th>
+                                    <th>Jumlah</th>
+                                </tr>
                              <?php
                                 $test = $list->id_order;
                                 $i = 1;
                                  foreach ($detil as $value) {
-                                    if ($value->id_order == $test) {
-                                        echo $i;
-                                        echo ". ";
-                                        echo $value->nama;
-                                        $i++?><br>
+                                    if ($value->id_order == $test) { ?>
+                                    <tr>
+                                        <td><?= $i; ?></td>
+                                        <td><?= $value->nama_menu; ?></td>
+                                        <td><?= $value->qty; ?></td>
+                                    </tr>
+                                        
 
-                                    <?php
+                                    <?php $i++;
                                     }
                                      
                                  }
                              ?>
+                            </table>
                         </div>
                         <br>
                         <center>
