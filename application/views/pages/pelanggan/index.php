@@ -66,11 +66,14 @@
 								<li><a class="js-scroll-trigger" href="#menu-makanan">Pesan</a></li>
 								<li><a class="js-scroll-trigger" href="#about">Tentang</a></li>
 								<li><a class="js-scroll-trigger" href="#nino-map">Lokasi</a></li>
+								<li><a class="js-scroll-trigger" id="my-nota-icon">Nota</a></li>
 							</ul>
 						</div><!-- /.navbar-collapse -->
+						<div>
 						<ul class="nino-iconsGroup nav navbar-nav">
-							<li style="top: 15px; right: 5px;"><span class="fa fa-shopping-cart my-cart-icon" style="color: white; cursor: pointer;"><span class="badge badge-notify my-cart-badge"></span></span></li>
+							<li style="margin-top: 14px; right: 5px;"><span class="fa fa-shopping-cart my-cart-icon" style="color: white; cursor: pointer;"><span class="badge badge-notify my-cart-badge"></span></span></li>
 						</ul>
+						<div>
 					</div>
 				</div><!-- /.container-fluid -->
 			</nav>
@@ -546,433 +549,102 @@
   	});
   	//kirim data cart ke database
   	$(document).on('click','#confirm', function(){
+  		swal({
+  			title: "Apakah Anda Yakin Akan Memesan? Pesanan Tidak dapat Dibatalkan",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Pesan",
+            cancelButtonText: "Batal",
+            closeOnConfirm: false,
+            closeOnCancel: true
+  		},
+  			function(isConfirm) {
+  				if (isConfirm){
+  					$.ajax({
+			            url:"<?php echo base_url('Pelanggan/inspesan') ?>",
+			            method:"POST",
+			            dataType : "json",
+			            success: function(response){
+			            	swal({
+			                        title: "Pesanan Berhasil",
+			                        type: "success",
+			                    });
+			            	getJumlah();
+			            }
+			        });	
+  				}
+  			}
+  		);
+  		
+  	});  
+
+  	$(document).on('click','#my-nota-icon', function(){
+  		$('#my-nota-modal').modal('show');
   		$.ajax({
-            url:"<?php echo base_url('Pelanggan/inspesan') ?>",
+            url:"<?php echo base_url('Pelanggan/getnota') ?>",
             method:"POST",
             dataType : "json",
             success: function(response){
-            	swal({
-                        title: "Pesanan Berhasil",
-                        type: "success",
-                    });
+            	$.each(response.order,function(i) {
+            	 console.log(response.order[i].id_order);
+            	 $('<p>').text(response.order[i].id_order).appendTo('#modalbodynota');
+            		 $.each(response.pesan,function(j) {
+            		 	if (response.order[i].id_order == response.pesan[j].id_order) {
+            		 		console.log(response.pesan[j].kd_pesanan);
+            		 		$('<p>').text(response.pesan[j].kd_pesanan).appendTo('#modalbodynota');
+            		 	}
+            		 	
+            		 });
+
+            	});
             }
-        });
-  	});  	
+        });	
+  	});
+
 
 
    </script>
   <!-- modal pesan -->
 		<div class="modal fade" id="my-cart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">' +
-        <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-shopping-cart"></span> My Cart</h4>
+	        <div class="modal-dialog" role="document">' 
+		        <div class="modal-content">
+			        <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-shopping-cart"></span> My Cart</h4>
+			        </div>
+			        <div class="modal-body">
+			        	<table class="table table-hover table-responsive" id="my-cart-table"></table>
+			        </div>
+			        <div class="modal-footer">
+				        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-success" data-dismiss="modal" id="confirm">Confirm</button>
+			        </div>
+		        </div>
+	        </div>
         </div>
-        <div class="modal-body">
-        <table class="table table-hover table-responsive" id="my-cart-table"></table>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" id="confirm">Confirm</button>
-        </div>
-        </div>
-        </div>
+
+        <div class="modal fade" id="my-nota-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	        <div class="modal-dialog" role="document">' 
+		        <div class="modal-content">
+			        <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+				        <h4 class="modal-title" id="myModalLabel2"><span class=""></span> Nota Pembayaran </h4>
+			        </div>
+			        <div class="modal-body" id="modalbodynota">
+			        	<table class="table table-hover table-responsive" id="my-nota-table"></table>
+			        </div>
+			        <div class="modal-footer">
+				        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-success" data-dismiss="modal" id="">Bayar</button>
+			        </div>
+		        </div>
+	        </div>
         </div>
         
   <!-- /modal -->
   <!-- product -->
  <!--  <form method="POST" action="<?= base_url('Pelanggan/inspesan');?>"><button type="submit" class="btn btn-success" data-dismiss="modal" id="confirm">Confirm</button></form> -->
   
-			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/ma1.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Soto</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.15.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="1" data-name="Soto" data-summary="summary 1" data-price="15.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma1.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-<!-- product -->
-			<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog dialog-head" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/ma2.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Nasi Bali</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">20.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="2" data-name="Nasi Bali" data-summary="summary 2" data-price="20.000" data-quantity="1" data-image="images/of1.png">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/ma3.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Steak</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.35.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="3" data-name="Steak" data-summary="summary 3" data-price="35.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma3.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/ma4.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Kare</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.25.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="4" data-name="Soya Chunks" data-summary="summary 4" data-price="25.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ma4.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/mi1.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Orange Squash</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.12.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="5" data-name="Orange Squash" data-summary="summary 5" data-price="0.70" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/mi1.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/mi2.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Ice Lemon Honey</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.10.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="6" data-name="Ice Lemon Honey" data-summary="summary 6" data-price="0.70" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/mi2.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/mi3.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Ice Lemon Tea</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.8.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="7" data-name="Ice Lemon Tea" data-summary="summary 7" data-price="8.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/mi3.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/mi4.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Strawberry delight</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.15.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="8" data-name="Strawberry Delight" data-summary="summary 8" data-price="15.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/mi4.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/ta1.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Kerupuk (500gr)</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.15.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="9" data-name="Kerupuk" data-summary="summary 9" data-price="15.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ta1.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/ta2.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Bawang Goreng (250gr)</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.5.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="10" data-name="Bawang" data-summary="summary 10" data-price="5.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ta2.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal11" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/ta3.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Onion Ring</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.13.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="11" data-name="Bitter Gourd" data-summary="summary 11" data-price="13.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ta3.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- product -->
-			<div class="modal fade" id="myModal12" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content modal-info">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-						</div>
-						<div class="modal-body modal-spa">
-								<div class="col-md-5 span-2">
-											<div class="item">
-												<img src="<?php echo base_url('assets/image/menu/ta4.jpg');?>" class="img-responsive" alt="">
-											</div>
-								</div>
-								<div class="col-md-7 span-1 ">
-									<h3>Kentang Goreng</h3>
-									<p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-									<div class="price_single">
-									  <span class="reducedfrom ">Rp.15.000</span>
-									
-									 <div class="clearfix"></div>
-									</div>
-									<h4 class="quick">Quick Overview:</h4>
-									<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-									 <div class="add-to">
-										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="12" data-name="Kentang Goreng" data-summary="summary 12" data-price="15.000" data-quantity="1" data-image="<?php echo base_url('assets/image/menu/ta4.jpg');?>">Add to Cart</button>
-										</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-<h1><?php 
-$device = $this->session->userdata('device');
-echo $device;
-?></h1>
-<h2><a href="<?php echo base_url('login/destroy'); ?>">Logout</a>
-</h2>
 </body>
 </html>

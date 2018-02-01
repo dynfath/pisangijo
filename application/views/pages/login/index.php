@@ -88,7 +88,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <option>Divisi</option>
                 <option></option>
                 <option value="CS">Customer Service</option>
-                <option value="kasir">Kasir</option>
+                <option value="Kasir">Kasir</option>
                 <option value="Chef">Chef</option>
                 <option value="pelayan">Pelayan</option>
                 <option value="pantry">Pantry</option>

@@ -68,6 +68,24 @@
 		return $query->result_array();
 	}
 
+	function getNota(){
+		$data = array(
+				'device' => $this->session->userdata('device'),
+				'status' => 0
+			);
+		$query = $this->db->get_where('order', $data);
+		return $query->result_array();
 	}
+
+	function getNotadetil(){
+		$this->db->select('*');
+		$this->db->from('pesan');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+
+}
+
 	
 ?>

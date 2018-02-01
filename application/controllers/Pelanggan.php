@@ -72,6 +72,14 @@ class Pelanggan extends CI_Controller {
 
 	function inspesan(){
 		$data = $this->menu->insertPesan();
+		$this->cart->destroy();
 		echo json_encode($data);
 	}
+
+	function getnota(){
+		$get['order'] = $this->menu->getNota();
+		$get['pesan'] = $this->menu->getNotadetil();
+		echo json_encode($get);
+	}
+
 }
