@@ -1,4 +1,4 @@
-<?php 
+ <?php 
 	class Menu extends CI_Model
 	{
 		
@@ -116,6 +116,57 @@
 		$this->db->from('detail_pesanan');
 		$query = $this->db->get();
 		return $query->result();
+	}
+
+	function requestbill(){
+		$data = array(
+			'device' => $this->session->userdata('device'), 
+			'deskripsi' => 'Request Bill',
+			'status'	=> '0'
+		);
+
+		$query = $this->db->get_where('billrequest', $data);
+		$req = $query->result_array();
+		if(count($req) == 0){
+			$query = $this->db->insert('billrequest',$data);
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	function bahanbaku(){
+		$this->db->trans_begin();
+		$gagal = false;
+		foreach ($this->cart->contents() as $value) {
+			$this->db->select('b1.`id_menu` AS id_menu,b1.`id_bahan` AS id_bahan, b1.`jumlah` AS jml_pakai, b2.`jumlah` AS jml_stock');
+	        $this->db->from('bahan_menu b1');
+	        $this->db->join('bahan b2', 'b1.`id_bahan`=b2.`id_bahan`');
+	        $this->db->where('b1.`id_menu`', $value['id']);
+	        $query = $this->db->get()->result_array();
+	        	foreach ($query as $key) {
+	        		 $jml = $key['jml_pakai'] * $value['qty'];
+	        		 $stock = $key['jml_stock'];
+	        		 $stock = $stock - $jml;
+	        		 $hasil[] = array('jumlah' => $stock, 'id' => $key['id_bahan'] );
+	        		 if ($stock < 0) {
+	        		 	$gagal = true;
+	        		 } else {
+	        		 	$this->db->set('jumlah', $stock);
+	        			$this->db->where('id_bahan', $key['id_bahan']);
+	        		 	$this->db->update('bahan');
+	        		 }
+	        	}
+
+		}
+		if ($gagal != true) {
+			$this->db->trans_commit();
+			return $hasil;
+		} else {
+			$this->db->trans_rollback();
+			return false;
+		}	
+		
 	}
 	
 

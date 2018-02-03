@@ -549,34 +549,61 @@
   	});
   	//kirim data cart ke database
   	$(document).on('click','#confirm', function(){
-  		swal({
-  			title: "Apakah Anda Yakin Akan Memesan? Pesanan Tidak dapat Dibatalkan",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonClass: "btn-danger",
-            confirmButtonText: "Pesan",
-            cancelButtonText: "Batal",
-            closeOnConfirm: false,
-            closeOnCancel: true
-  		},
-  			function(isConfirm) {
-  				if (isConfirm){
-  					$.ajax({
-			            url:"<?php echo base_url('Pelanggan/inspesan') ?>",
+  		$.ajax({
+            url:"<?php echo base_url('Pelanggan/newbahanbaku') ?>",
+            method:"POST",
+            dataType : "json",
+            success: function(response){
+            	if (response == false) {
+            		console.log(response);
+            		swal({
+            			title : "Mohon Maaf Stok untuk Pesanan Anda tidak mencukupi, silahkan pesan menu yang lain atau hubungi pelayan",
+            			type: "warning",
+            			cancelButtonText: "OK"
+            		});
+            		$.ajax({
+			            url:"<?php echo base_url('Pelanggan/clearcart') ?>",
 			            method:"POST",
 			            dataType : "json",
 			            success: function(response){
-			            	swal({
-			                        title: "Pesanan Berhasil",
-			                        type: "success",
-			                    });
-			            	getJumlah();
 			            	console.log(response);
+			            	getJumlah();
 			            }
-			        });	
-  				}
-  			}
-  		);
+			        });
+            	} else {
+            		console.log('sukses');
+            		swal({
+			  			title: "Apakah Anda Yakin Akan Memesan? Pesanan Tidak dapat Dibatalkan",
+			            type: "warning",
+			            showCancelButton: true,
+			            confirmButtonClass: "btn-danger",
+			            confirmButtonText: "Pesan",
+			            cancelButtonText: "Batal",
+			            closeOnConfirm: false,
+			            closeOnCancel: true
+			  		},
+			  			function(isConfirm) {
+			  				if (isConfirm){
+			  					$.ajax({
+						            url:"<?php echo base_url('Pelanggan/inspesan') ?>",
+						            method:"POST",
+						            dataType : "json",
+						            success: function(response){
+						            	swal({
+						                        title: "Pesanan Berhasil",
+						                        type: "success",
+						                    });
+						            	getJumlah();
+						            	console.log(response);
+						            }
+						        });	
+			  				}
+			  			}
+			  		);
+            	}
+            }
+        });	
+  		
   		
   	});  
 
@@ -622,7 +649,21 @@
         });	
   	});
 
-
+  	$(document).on('click','#reqbill', function(){
+  		console.log('test');
+  		$.ajax({
+            url:"<?php echo base_url('Pelanggan/billreq') ?>",
+            method:"POST",
+            dataType : "json",
+            success: function(response){
+            	swal({
+                        title: "Nota Pembayaran Akan Segera Dikirimkan... \n Mohon Tunggu Sebentar!",
+                        type: "success",
+                    });
+            	console.log(response);
+            }
+        });	
+	});
 
    </script>
   <!-- modal pesan -->
@@ -656,7 +697,7 @@
 			        </div>
 			        <div class="modal-footer">
 				        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-success" data-dismiss="modal" id="">Bayar</button>
+				        <button type="button" class="btn btn-success" data-dismiss="modal" id="reqbill">Bayar</button>
 			        </div>
 		        </div>
 	        </div>

@@ -5,6 +5,7 @@ class Pelayan extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
         $this->load->model('menu');
+        $this->load->model('Pelayan_model');
         $this->load->helper('url_helper');
 	}
 
@@ -38,5 +39,16 @@ class Pelayan extends CI_Controller {
 	function tampilmenu(){
 		$data= $this->menu->getpesanan();
 		echo json_encode($data);
+	}
+
+	function showReqbill(){
+		$bill = $this->Pelayan_model->getBillreq();
+		echo json_encode($bill);
+	}
+
+	function takebill(){
+		$id = $this->input->post('id');
+		$req = $this->Pelayan_model->takeBillreq($id);
+		echo json_encode($id);
 	}
 }

@@ -67,6 +67,9 @@
                         <li>
                             <a href="<?php echo base_url('pelayan/pesanan');?>"><i class="fa fa-hand-o-right nav_icon"></i>Pesanan</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url('pelayan/requestbill');?>"><i class="fa fa-hand-o-right nav_icon"></i>Bill Request</a>
+                        </li>
                     </ul>
                     <br><br>
                 </div>
@@ -187,26 +190,6 @@
         getPesanan();
 
       });
-
-      /*$(document).on('click', '#detilpesan', function(){
-        $('#detil-modal').modal('show');
-        $.ajax({
-            url : "<?php echo base_url('Pelayan/tampilmenu');?>",
-            dataType : "json",
-            success:function(response){
-              $(".table #pesanan").remove();
-              $.each(response,function(i){
-                 $("<tr id='pesanan'>").append(
-                 $("<td id='"+response[i].id_order+"'>").text(response[i].id_order),
-                 $("<td id='detil"+i+"'>").text(response[i].device),
-                 $("<td id='total_harga"+i+"'>").text(response[i].total_harga),
-                 $("<td><input type='button' class='btn btn-success' id='detilpesan' value='Detil'>")
-                 ).appendTo(".table")
-
-               });
-            }
-        });  
-      });*/
     </script>
 </body>
 </html>

@@ -101,5 +101,21 @@ class Pelanggan extends CI_Controller {
 		echo count($rowdata);
 	}
 
+	function billreq(){
+		$req = $this->menu->requestbill();
+		echo json_encode($req);
+	}
+
+	function newbahanbaku(){
+		header('aplication/json');
+		$data = $this->menu->bahanbaku();
+		echo json_encode($data);
+	}
+
+	function clearcart(){
+		$this->cart->destroy();
+		echo json_encode("success");
+	}
+
 
 }

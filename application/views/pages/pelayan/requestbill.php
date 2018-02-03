@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Pisang Ijo" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!-- Bootstrap Core CSS -->
 <link href="<?php echo base_url('assets/css/bootstrap.min.css');?>" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
 <link href="<?php echo base_url('assets/css/admin.css');?>" rel='stylesheet' type='text/css' />
@@ -21,46 +22,6 @@
 <!-- Metis Menu Plugin JavaScript -->
 <script src="<?php echo base_url('assets/js/metisMenu.min.js');?>"></script>
 <script src="<?php echo base_url('assets/js/custom.js');?>"></script>
-<script type='text/javascript'>
-    $(document).on('click','input[type=button]', function() {
-               buttonVal = $(this).val();
-    if(buttonVal == 'Pilih' )
-    {
-        $(this).prop("disabled", true);
-        $('#closeButton').prop("disabled", false);
-        $(this).prop("hidden", true);
-        $('#closeButton').prop("hidden", false);
-    }
-    else
-    {
-         $('#closeButton').prop("disabled", true);
-         $('#closeButton').prop("hidden", true);
-         $('#openButton').prop("disabled", false);
-         $('#openButton').prop("hidden", false);
-    }
-});
-
-   var toggle = true;
-        function changeColor()
-        {
-            document.getElementById('bID').style.background =
-            toggle ? "red" : "green";
- 
-            toggle = !toggle;
-        }
-
-    $(document).ready(function() {
-     $("#openButton").click(function() {
-       $("#ket").text("NA");
-     }) 
-   });
-
-    $(document).ready(function() {
-     $("#closeButton").click(function() {
-       $("#ket").text("Tersedia");
-     }) 
-   });
-</script>
 </head>
 
 <body>
@@ -78,22 +39,22 @@
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-menu-header text-center">
-                            <strong>Settings</strong>
-                        </li>
-                        <li class="m_2"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                        <li class="m_2"><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
-                        <li class="m_2"><a href="#"><i class="fa fa-usd"></i> Payments <span class="label label-default">42</span></a></li>
-                        <li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
-                        <li class="divider"></li>
-                        <li class="m_2"><a href="#"><i class="fa fa-shield"></i> Lock Profile</a></li>
-                        <li class="m_2"><a href="<?php echo base_url('login/destroy'); ?>"><i class="fa fa-lock"></i> Logout</a></li>   
-                    </ul>
-                </li>
-            </ul>
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
+              <ul class="dropdown-menu">
+            <li class="dropdown-menu-header text-center">
+              <strong>Settings</strong>
+            </li>
+            <li class="m_2"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+            <li class="m_2"><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
+            <li class="m_2"><a href="#"><i class="fa fa-usd"></i> Payments <span class="label label-default">42</span></a></li>
+            <li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
+            <li class="divider"></li>
+            <li class="m_2"><a href="#"><i class="fa fa-shield"></i> Lock Profile</a></li>
+            <li class="m_2"><a href="<?php echo base_url('login/destroy'); ?>"><i class="fa fa-lock"></i> Logout</a></li> 
+              </ul>
+            </li>
+      </ul>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <center>
@@ -106,10 +67,9 @@
                         <li>
                             <a href="<?php echo base_url('pelayan/pesanan');?>"><i class="fa fa-hand-o-right nav_icon"></i>Pesanan</a>
                         </li>
-                          <li>
+                        <li>
                             <a href="<?php echo base_url('pelayan/requestbill');?>"><i class="fa fa-hand-o-right nav_icon"></i>Bill Request</a>
                         </li>
-                    </ul>
                     </ul>
                     <br><br>
                 </div>
@@ -118,39 +78,81 @@
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
-        <div class="graphs">
-            <h3>Cek Meja</h3>
-            <br>
-        <div class="row clearfix">
-                <?php foreach ($devices as $dev): ?>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="header bg-red" align="center" id="bID">
-                            <h3 class="ketersediaan" id="ket">
-                                Tersedia
-                            </h3>
-                        </div>
-                        <div class="body" align="center">
+        <div class="col-md-12 graphs">
+	   <div class="xs">
+  	 <h3>PESANAN</h3>
+  	<div class="bs-example4" data-example-id="contextual-table">
+    <table class="table" id="bill">
+      <thead>
+        <tr>
+          <th>Request From</th>
+          <th>Keterangan</th>
+          <th>Done?</th>
+        </tr>
+      </thead>
+      <tbody id="reqbill">
+        
+      </tbody>
+    </table>
+   </div>
+	<div class="bs-example4" data-example-id="simple-responsive-table">
+    <div class="table-responsive">
+    </div><!-- /.table-responsive -->
+  </div>
+  </div>
+<br><br><br><br><br><br>
 
-                            Meja <?php echo $dev['kd_device']?>
-                            <br><br><br><br>
-                            Kapasitas : 4 Orang
-                        </div>
-                        <br>
-                        <br>
-                    </div>
-                </div>
-            <div class="clearfix"> </div>
-        <?php endforeach ?>
-     
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-        <div class="copy">
+    <div class="copy">
             <p>Copyright &copy; 2017 Pisang Ijo. All Rights Reserved | Design by <a href="#" target="_blank">US</a> </p>
-        </div>
+      </div>
+
+
     <!-- /#wrapper -->
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>
+    <script type="text/javascript">
+      var interval=5000;
+      function getBill(){
+        $.ajax({
+            url : "<?php echo base_url('Pelayan/showReqbill');?>",
+            dataType : "json",
+            success:function(response){
+              console.log(response);
+              $(".table #reqbill").empty();
+              $.each(response,function(i){
+                 var id = response[i].device;
+                 $("<tr id='"+id+"'>").append(
+                 $("<td id='"+i+"'>").text(response[i].device),
+                 $("<td id='keterangan"+i+"'>").text(response[i].deskripsi),
+                 $("<td><input type='button' class='btn btn-success' id='doit' onclick=doit(\""+id+"\") value='Confirm'>")
+                 ).appendTo("#reqbill")
+
+               });
+            },
+            complete:function(response){
+              setTimeout(getBill,interval);
+            }
+        });
+      }
+      setTimeout(getBill,interval);
+      
+      function doit(id){
+        $("#"+id).fadeOut();
+         $.ajax({
+            url : "<?php echo base_url('Pelayan/takebill');?>",
+            method : "POST",
+            dataType : "json",
+            data:{id:id},
+            success:function(response){
+              console.log(response); 
+            }
+        });
+      }
+
+      $(document).on('ready', function(){
+        getBill();
+
+      });
+    </script>
 </body>
 </html>
